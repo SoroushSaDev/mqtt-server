@@ -73,5 +73,5 @@ func main() {
 	<-done
 	server.Log.Warn("caught signal, stopping...")
 	_ = server.Close()
-	server.Log.Info("mochi mqtt shutdown complete")
+	server.Log.Info("Metariom mqtt shutdown complete")
 }

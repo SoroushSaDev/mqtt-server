@@ -333,8 +333,8 @@ func (s *Server) AddListenersFromConfig(configs []listeners.Config) error {
 // Serve starts the event loops responsible for establishing client connections
 // on all attached listeners, publishing the system topics, and starting all hooks.
 func (s *Server) Serve() error {
-	s.Log.Info("mochi mqtt starting", "version", Version)
-	defer s.Log.Info("mochi mqtt server started")
+	s.Log.Info("Metariom mqtt starting", "version", Version)
+	defer s.Log.Info("Metariom mqtt server started")
 
 	if len(s.Options.Listeners) > 0 {
 		err := s.AddListenersFromConfig(s.Options.Listeners)
@@ -1493,7 +1493,7 @@ func (s *Server) Close() error {
 	s.hooks.OnStopped()
 	s.hooks.Stop()
 
-	s.Log.Info("mochi mqtt server stopped")
+	s.Log.Info("Metariom mqtt server stopped")
 	return nil
 }
 

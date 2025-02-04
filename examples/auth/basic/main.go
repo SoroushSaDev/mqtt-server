@@ -1,7 +1,3 @@
-// SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2022 mochi-mqtt, mochi-co
-// SPDX-FileContributor: mochi-co
-
 package main
 
 import (
@@ -26,25 +22,20 @@ func main() {
 
 	authRules := &auth.Ledger{
 		Auth: auth.AuthRules{ // Auth disallows all by default
-			{Username: "peach", Password: "password1", Allow: true},
-			{Username: "melon", Password: "password2", Allow: true},
-			{Remote: "127.0.0.1:*", Allow: true},
-			{Remote: "localhost:*", Allow: true},
+			{Remote: "0.0.0.0:*", Allow: true},
+			{Username: "BehinStart", Password: "Aa@123456", Allow: true},
+			{Username: "MetariomShow", Password: "MetariomShow1234*", Allow: true},
 		},
 		ACL: auth.ACLRules{ // ACL allows all by default
 			{Remote: "127.0.0.1:*"}, // local superuser allow all
 			{
-				// user melon can read and write to their own topic
-				Username: "melon", Filters: auth.Filters{
-					"melon/#":   auth.ReadWrite,
-					"updates/#": auth.WriteOnly, // can write to updates, but can't read updates from others
+				Username: "BehinStart", Filters: auth.Filters{
+					"#":   auth.ReadWrite,
 				},
 			},
 			{
-				// Otherwise, no clients have publishing permissions
-				Filters: auth.Filters{
-					"#":         auth.ReadOnly,
-					"updates/#": auth.Deny,
+				Username: "MetariomShow", Filters: auth.Filters{
+					"METARIOM/MetariomShow":   auth.ReadWrite,
 				},
 			},
 		},
