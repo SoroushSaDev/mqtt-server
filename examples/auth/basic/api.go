@@ -22,8 +22,13 @@ type User struct {
 }
 
 type ACL struct {
-	Username string   `json:"username"`
-	Topics   []string `json:"topics"`
+	Username string  `json:"username"`
+	Topics   []Topic `json:"topics"`
+}
+
+type Topic struct {
+	Topic      string `json:"topic"`
+	Permission string `json:"permission"`
 }
 
 var (
@@ -69,7 +74,6 @@ func fetchDataFromAPI() {
 		authRules.ACL = auth.ACLRules{}
 
 		for _, user := range data.Users {
-			log.Println(user)
 			authRules.Auth = append(authRules.Auth, auth.AuthRule{
 				Username: auth.RString(user.Username),
 				Password: auth.RString(user.Password),
@@ -80,7 +84,22 @@ func fetchDataFromAPI() {
 		for _, acl := range data.ACLs {
 			aclRule := auth.ACLRule{Username: auth.RString(acl.Username), Filters: auth.Filters{}}
 			for _, topic := range acl.Topics {
-				aclRule.Filters[auth.RString(topic)] = auth.ReadWrite
+				var permission auth.Access
+				switch auth.RString(topic.Permission) {
+				case "rw":
+					permission = auth.ReadWrite
+					break
+				case "r":
+					permission = auth.ReadOnly
+					break
+				case "w":
+					permission = auth.WriteOnly
+					break
+				default:
+					permission = auth.Deny
+					break
+				}
+				aclRule.Filters[auth.RString(topic.Topic)] = permission
 			}
 			authRules.ACL = append(authRules.ACL, aclRule)
 		}
