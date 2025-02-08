@@ -2,6 +2,9 @@
 First of all clone the [mqtt-server](https://github.com/SoroushSaDev/mqtt-server) project from Github and then proceed with the installation 
 
 **Installation tutorial is only for Microsoft Windows & Ubuntu Linux**
+
+*In all senarios below, use "api.go" file to build the API version & main.go for the static (default) version*
+
 ## Windows Installation
 To install and run the server on a Windows machine, you need to install **[Go Lang](https://go.dev/doc/install)** first.
 
@@ -33,3 +36,5 @@ a bash file named "server" will be created next to the "main.go" file in the cur
 
 ### Notes
 - Building the server for the first time might take longer due to the installation of required packages & libraries (Network connection required)
+- If you wanna use the API version, set the value of the "apiURL" variable (line 43) in the "api.go" file to retreive users & ACL data from your desired endpoint
+- If you wanna use the Static version, you can set your users info in the "authRules" variable (line 23)
