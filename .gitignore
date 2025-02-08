@@ -3,3 +3,4 @@ cmd/mqtt
 *.db
 .idea
 vendor
+.env
