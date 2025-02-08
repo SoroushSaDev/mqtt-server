@@ -3,7 +3,7 @@ First of all clone the [mqtt-server](https://github.com/SoroushSaDev/mqtt-server
 
 **Installation tutorial is only for Microsoft Windows & Ubuntu Linux**
 
-*In all senarios below, use "api.go" file to build the API version & main.go for the static (default) version*
+*In all senarios below, use "api.go" file (instead of "main.go") to build the API version, "main.go" file is for the Static (default) version*
 
 ## Windows Installation
 To install and run the server on a Windows machine, you need to install **[Go Lang](https://go.dev/doc/install)** first.
