@@ -74,6 +74,7 @@ func fetchDataFromAPI() {
 		authRules.ACL = auth.ACLRules{}
 
 		for _, user := range data.Users {
+			log.Println(user)
 			authRules.Auth = append(authRules.Auth, auth.AuthRule{
 				Username: auth.RString(user.Username),
 				Password: auth.RString(user.Password),
@@ -83,6 +84,7 @@ func fetchDataFromAPI() {
 
 		for _, acl := range data.ACLs {
 			aclRule := auth.ACLRule{Username: auth.RString(acl.Username), Filters: auth.Filters{}}
+			log.Println(acl)
 			for _, topic := range acl.Topics {
 				var permission auth.Access
 				switch auth.RString(topic.Permission) {
