@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/joho/godotenv"
 	mqtt "github.com/mochi-mqtt/server/v2"
 	"github.com/mochi-mqtt/server/v2/hooks/auth"
 	"github.com/mochi-mqtt/server/v2/listeners"
@@ -40,7 +41,19 @@ var (
 )
 
 func fetchDataFromAPI() {
-	apiURL := "http://127.0.0.1:8000/mqtt/auth"
+	// Load the .env file
+	err := godotenv.Load("../../../.env")
+	if err != nil {
+		log.Printf("Error loading .env file: %v", err)
+		log.Printf("Current working directory: %s", os.Getenv("PWD"))
+		log.Fatal("Make sure the .env file exists in the correct directory.")
+	}
+
+	// Fetch the API URL from the environment variable
+	apiURL := os.Getenv("API_URL")
+	if apiURL == "" {
+		log.Fatal("API_URL not found in .env file")
+	}
 
 	for {
 		resp, err := http.Get(apiURL)
